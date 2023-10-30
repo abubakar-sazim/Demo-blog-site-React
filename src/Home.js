@@ -3,12 +3,7 @@ import BlogList from "./BlogList";
 
 const Home = () => {
 
-    const [blogs, setBlogs] = useState([
-        { title: 'Blog 1', body: 'Here is the blog body. Bla bla bla', author: 'Abu Bakar', id:1 },
-        { title: 'Blog 2', body: 'Hello! How are you. Bla bla bla', author: 'Akhi', id:2 },
-        { title: 'Blog 3', body: 'Woops!', author: 'Abu Bakar', id:3 },
-        
-    ]);
+    const [blogs, setBlogs] = useState(null);
 
     const handleDelete = (id) => {
         const newBlogs = blogs.filter(blog => blog.id !== id);
