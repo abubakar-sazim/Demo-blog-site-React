@@ -1,14 +1,9 @@
-import { useState } from "react";
 import BlogList from "./BlogList";
+import useFetch from "./useFetch";
 
 const Home = () => {
 
-    const [blogs, setBlogs] = useState(null);
-
-    const handleDelete = (id) => {
-        const newBlogs = blogs.filter(blog => blog.id !== id);
-        setBlogs(newBlogs);
-    }
+    const { error, isPending, data: blogs } = useFetch('http://localhost:8000/blogs')
 
     const handleClick = () =>{
         console.log('Button clicked!');
@@ -21,10 +16,12 @@ const Home = () => {
             <button onClick={handleClick}>Click Me</button>
             <br />
             <br />
-            <BlogList blogs={blogs} title='All Blogs' handleDelete={handleDelete}/>
+            { error && <div>{ error } </div>}
+            { isPending && <div>Loading... </div>}
+            {blogs && <BlogList blogs={blogs} title='All Blogs'/>}
             {/* <BlogList blogs={blogs.filter((blog) => blog.author === 'Abu Bakar')} title="Abu Bakar's Blogs"/> */}
         </div>
     );
 }
- 
+
 export default Home;
